@@ -7,7 +7,7 @@
  */
 function __autoload($className)
 {
-    $path = $className.".php";
+    $path = "libs/".$className.".php";
     if(file_exists($path)){
         require_once($path);
     } else {
