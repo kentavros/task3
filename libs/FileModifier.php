@@ -6,69 +6,55 @@
 
 class FileModifier
 {
+
     private $filePath;
     private $descriptor;
 
-
-
     /**
      *Construct  assigning a value
-     * for $filePath and $descriptor
+     * for $filePath and set filePath and open file
      */
-
     public function __construct($fPath)
     {
-        if (($this->filePath = $fPath) && ($this->descriptor = fopen($this->filePath, 'r+')))
+        if (file_exists($fPath))
         {
             $this->filePath = $fPath;
             $this->descriptor = fopen($this->filePath, 'r+');
         }
         else
         {
-            echo "Error path file or Error open file (rights)";
+            return FILE_MISSING;
         }
-
-
     }
 
     /**
      * function get file path
-     * @return mixed filePath
+     * @return string filePath
      */
-
     public function getFilePath()
     {
-        return $this->filePath;
-    }
-
-    /**
-     * get one symbol from file (filePath)
-     * @return string one symbol
-     */
-    public function getChar()
-    {
-        $char = fgetc($this->descriptor);
-        if ($char === false)
+        if(!empty($this->filePath))
         {
-            //Resets the handle to the beginning
-            rewind($this->descriptor);
+            return $this->filePath;
         }
-        return "$char";
+        else
+        {
+            return FILE_MISSING;
+        }
     }
 
-    /**
-     * get one string from file (filePath)
-     * @return string $str
-     */
-    public function getStr()
+    public function readFile()
     {
-        $str = fgets($this->descriptor);
-        if ($str === false){
-            //Resets the handle to the beginning
-            rewind($this->descriptor);
-        }
-        return $str;
+        
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -84,5 +70,5 @@ class FileModifier
         fclose($this->descriptor);
     }
 
-
 }
+?>
