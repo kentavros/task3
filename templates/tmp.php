@@ -28,10 +28,13 @@
 </nav>
 <div class="container center-block ">
     <div class="starter-template text-center">
-        <h1 class="">File Read, write</h1>
+        <h1 class="">Preview file</h1>
+        <p><?php require_once ('libs/fileText');?></p>
     </div>
 
+<div>
 
+</div>
 
 
 

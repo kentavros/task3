@@ -43,11 +43,63 @@ class FileModifier
         }
     }
 
-    public function readFile()
+    /**
+     * Get file content to array and search line given
+     * @param $numStr
+     * @return string
+     */
+    public function readFileStr($numStr)
     {
-        
+        if(is_int((int)$numStr))
+        {
+            $file = file($this->filePath);
+            foreach ($file as $key => $strContent)
+            {
+                if ($key == $numStr)
+                {
+                    return $strContent;
+                }
+            }
+            return ROW_MISSING;
+        }
+        else
+        {
+            return UNKNOWN_ARG;
+        }
     }
 
+    /**
+     * Get file content to array and search line given
+     * @param $numStr
+     * @return string
+     */
+    public function readFileSymbol($numStr, $numSym)
+    {
+        if (is_int((int)$numStr) && is_int((int)$numSym))
+        {
+            $file = file($this->filePath);
+            foreach ($file as $key => $strContent)
+            {
+                if ($key == $numStr)
+                {
+                    if ($numSym  <= strlen($strContent))
+                    {
+                        $symbol = substr($strContent, $numSym, 1);
+                        if ($symbol == " "){
+                            return SPACE;
+                        }
+                        return $symbol;
+                    }
+
+                }
+            }
+            return ROW_MISSING;
+        }
+        else
+        {
+            return UNKNOWN_ARG;
+        }
+    }
 
 
 
