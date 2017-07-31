@@ -1,17 +1,10 @@
 <?php
 include ('libs/config.php');
 include ('libs/function.php');
-
-
 $objFile = new FileModifier('libs/fileText');
-echo $objFile->getFilePath();
-echo "<br />";
-
-echo $str = $objFile->readFileStr(1);
-echo "<br />";
-
-echo $objFile->readFileSymbol(3,4);
-
+$strRepLine = $objFile->strReplace(1, "An interesting task!!!");
+$symRepInLine = $objFile->symbolReplace(4, 5, 'O');
 include('templates/tmp.php');
 
 ?>
+

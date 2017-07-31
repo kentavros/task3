@@ -28,8 +28,38 @@
 </nav>
 <div class="container center-block ">
     <div class="starter-template text-center">
-        <h1 class="">Preview file</h1>
-        <p><?php require_once ('libs/fileText');?></p>
+        <?php if (isset($objFile)){ ?>
+        <h1>Preview file</h1>
+        <p><?=FileByRow('libs/examplefileText');?></p>
+
+        <table class="table container" style="width: 800px">
+            <tr>
+                <th class="text-center alert-info" style="width: 400px">Action</th>
+                <th class="text-center alert-info">Result</th>
+            </tr>
+            <tr>
+                <td>Method of line access (reading) #3
+                </td>
+                <td><?=$objFile->readFileStr(3); ?></td>
+            </tr>
+            <tr>
+                <td>Method by symbol access (read): line#3, Symbol#3</td>
+                <td><?=$objFile->readFileSymbol(3,3);?></td>
+            </tr>
+            <tr>
+                <td>Method to replace line#1 the enter:
+                    "An interesting task!!!"</td>
+                <td><?=$objFile->readFileStr(1)?></td>
+            </tr>
+            <tr>
+                <td>A method that replaces character in a string:
+                Line#4, symbol#5 replace at "О"</td>
+                <td><?=$objFile->readFileSymbol(4, 5) ?></td>
+            </tr>
+        </table>
+            <h2>Edit file</h2>
+            <?=$objFile->getFileByRow();?>
+        <?php } ?>
     </div>
 
 <div>

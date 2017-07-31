@@ -14,4 +14,14 @@ function __autoload($class)
         die ("File {$class} not found!");
     }
 }
+
+/**
+ * Method of output file by row
+ */
+function FileByRow($filePath)
+{
+    $text = file_get_contents($filePath);
+    return nl2br($text);
+}
+
 ?>
