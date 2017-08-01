@@ -30,11 +30,11 @@
     <div class="starter-template text-center">
         <?php if (isset($objFile)){ ?>
         <h1>Preview file</h1>
-        <p><?=FileByRow('libs/examplefileText');?></p>
+        <p><?=$objFile->getFileByRow();?></p>
 
         <table class="table container" style="width: 800px">
             <tr>
-                <th class="text-center alert-info" style="width: 400px">Action</th>
+                <th class="text-center alert-info" style="width: 200px">Action</th>
                 <th class="text-center alert-info">Result</th>
             </tr>
             <tr>
@@ -43,22 +43,51 @@
                 <td><?=$objFile->readFileStr(3); ?></td>
             </tr>
             <tr>
+                <td>Method print by line</td>
+                <td><?php foreach ($objFile->printStr() as $v) {echo $v;}?></td>
+                <!--ELSE print$count = count(file($objFile->getFilePath()));
+                for($i=0; $i<$count; $i++){echo nl2br($objFile->readFileStr($i));} -->
+            </tr>
+            <tr>
                 <td>Method by symbol access (read): line#3, Symbol#3</td>
                 <td><?=$objFile->readFileSymbol(3,3);?></td>
+
+            </tr>
+            <tr>
+                <td>Method print by Symbol</td>
+                <td><?php foreach ($objFile->printStrSymbol() as $v){echo $v;} ?></td>
+                <!--ELSE print for($i=0; $i<$count; $i++)
+                    {
+                        $count2 = strlen($objFile->readFileStr($i));
+                        for($n=0; $n<$count2; $n++)
+                        {
+                            echo nl2br($objFile->readFileSymbol($i, $n));
+                        }
+                    }-->
             </tr>
             <tr>
                 <td>Method to replace line#1 the enter:
                     "An interesting task!!!"</td>
-                <td><?=$objFile->readFileStr(1)?></td>
+                <td><?=$objFile->strReplace(1, "An interesting task!!!");?></td>
+            </tr>
+            <tr>
+                <td>Method print by line</td>
+                <td><?php foreach ($objFile->printStr() as $v) {echo $v;}?></td>
             </tr>
             <tr>
                 <td>A method that replaces character in a string:
-                Line#4, symbol#5 replace at "О"</td>
-                <td><?=$objFile->readFileSymbol(4, 5) ?></td>
+                Line#3, symbol#0 replace at "О"</td>
+                <td><?=$objFile->symbolReplace(3, 0, 'O');?></td>
+            </tr>
+            <tr>
+                <td>Method print by Symbol</td>
+                <td><?php foreach ($objFile->printStrSymbol() as $v){echo $v;} ?></td>
+            </tr>
+            <tr>
+                <td>Save file vethod</td>
+                <td>$objFile->saveFile($file)</td>
             </tr>
         </table>
-            <h2>Edit file</h2>
-            <?=$objFile->getFileByRow();?>
         <?php } ?>
     </div>
 

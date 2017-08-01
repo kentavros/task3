@@ -87,26 +87,12 @@ class FileModifier
                 {
                     if($numSym  <= strlen($strContent))
                     {
-                        switch ($strContent{$numSym})
-                        {
-                            case "\n":
-                                return EOL_N;
-                                break;
-                            case " ":
-                                return SPACE;
-                                break;
-                            case "\t":
-                                return EOL_TAB;
-                            case "\r":
-                                return EOL_R;
-                                break;
-                        }
+                        return $strContent{$numSym};
                     }
                     else
                     {
                         return SYMBOL_MISSING;
                     }
-                    return $strContent{$numSym};
                 }
             }
             return ROW_MISSING;
@@ -146,9 +132,7 @@ class FileModifier
     {
         if(isset($this->file [(int)$numStr]))
         {
-            $this->file [$numStr] = $newStr."\r\n";
-            $this->saveFile($this->file );
-            return true;
+            return $this->file [$numStr] = $newStr."\n";
         }
         else
         {
@@ -167,14 +151,43 @@ class FileModifier
     {
         if(isset($this->file[(int)$numStr]))
         {
-            $this->file[$numStr]{(int)$numSymbol} = $newSymbol;
-            $this->saveFile($this->file);
-            return true;
+            return $this->file[$numStr]{(int)$numSymbol} = $newSymbol;
         }
         else
         {
             return ROW_MISSING;
         }
+    }
+
+    /**
+     * Print by Line
+     * @return array
+     */
+    public function printStr(){
+        $count = count($this->file);
+        for($i=0; $i<$count; $i++)
+        {
+            $newFile[]=nl2br($this->readFileStr($i));
+        }
+        return $newFile;
+    }
+
+    /**
+     * Print by symbol
+     * @return array
+     */
+    public function printStrSymbol()
+    {
+        $count = count($this->file);
+        for($i=0; $i<$count; $i++)
+        {
+            $count2 = strlen($this->readFileStr($i));
+            for ($n=0; $n<$count2; $n++)
+            {
+                $newFile[] = nl2br($this->readFileSymbol($i, $n));
+            }
+        }
+        return $newFile;
     }
 }
 ?>
